@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="screen">
+    <div class="auth-card">
+        <h1>Task Manager</h1>
+        <p class="subtitle">Stay organised, get things done</p>
+
+        <div id="auth-tabs">
+            <button class="tab active" onclick="showTab('login')">Login</button>
+            <button class="tab" onclick="showTab('register')">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form">
+            <input type="text" id="login-username" placeholder="Username" />
+            <input type="password" id="login-password" placeholder="Password" />
+            <button class="btn-primary" onclick="login()">Login</button>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" style="display:none">
+            <input type="text" id="reg-username" placeholder="Username" />
+            <input type="email" id="reg-email" placeholder="Email" />
+            <input type="password" id="reg-password" placeholder="Password (min 6 chars)" />
+            <button class="btn-primary" onclick="register()">Create Account</button>
+        </div>
+
+        <p id="auth-error" class="error-msg"></p>
+    </div>
+</div>
+
+<!-- DASHBOARD SCREEN -->
+<div id="dashboard-screen" class="screen" style="display:none">
+
+    <header>
+        <h2>My Tasks</h2>
+        <div>
+            <span id="welcome-msg"></span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <span id="stat-total">0</span>
+            <label>Total</label>
+        </div>
+        <div class="stat">
+            <span id="stat-pending">0</span>
+            <label>Pending</label>
+        </div>
+        <div class="stat">
+            <span id="stat-done">0</span>
+            <label>Done</label>
+        </div>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterTasks('all', this)">All</button>
+        <button class="filter-btn" onclick="filterTasks('pending', this)">Pending</button>
+        <button class="filter-btn" onclick="filterTasks('completed', this)">Completed</button>
+    </div>
+
+    <!-- Add Task Form -->
+    <div class="add-task-card">
+        <h3>Add New Task</h3>
+        <input type="text" id="task-title" placeholder="Task title *" />
+        <input type="text" id="task-desc" placeholder="Description (optional)" />
+        <div class="row">
+            <select id="task-priority">
+                <option value="LOW">Low priority</option>
+                <option value="MEDIUM" selected>Medium priority</option>
+                <option value="HIGH">High priority</option>
+            </select>
+            <input type="date" id="task-due" />
+        </div>
+        <button class="btn-primary" onclick="createTask()">Add Task</button>
+        <p id="task-error" class="error-msg"></p>
+    </div>
+
+    <!-- Task List -->
+    <div id="task-list"></div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
