@@ -5,6 +5,6 @@ RUN mvn clean install
 
 FROM maven:3.9.16-eclipse-temurin-17-alpine AS runtime
 WORKDIR /app
-COPY --from=build /task/target/*.jar /app/
+COPY --from=build /task/target/*.jar /app/task.jar
 EXPOSE 8080
-CMD ["java","-jar","*.jar"]
+CMD ["java","-jar","task.jar"]
