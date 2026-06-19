@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: my-dp
+spec: 
+  minReadySeconds: 6
+  replicas: 4
+  selector: 
+    matchlabels: 
+      app: task-manager
+      Namespace: task
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template: 
+    metadata: 
+      name: dp-pod
+      labels:
+        app: task-manager
+    spec:
+      containers:
+      - name: dp-pod-cont
+        image: 771358505960.dkr.ecr.ap-south-1.amazonaws.com/task-manager:latest
+        ports:
+        - containerPort: 80
+      resources:
+        limits: 
+          memory: "512Mi"
+          cpu: "300m"
+        requests: 
+          memory: "1Gi"
+          cpu: "500m"
+
+
