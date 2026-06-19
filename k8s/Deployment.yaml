@@ -6,7 +6,7 @@ spec:
   minReadySeconds: 6
   replicas: 4
   selector: 
-    matchlabels: 
+    matchLabels: 
       app: task-manager
       Namespace: task
   strategy: 
