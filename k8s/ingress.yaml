@@ -1,20 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata: 
+metadata:
   name: my-ingress
-  annotations: 
+  annotations:
     owner: "durga"
     project: "task-manager-app"
-spec: 
+spec:
   ingressClassName: task-manager-ingress
-  rules: 
-    - http: 
-        paths: 
+  rules:
+    - http:
+        paths:
           - path: /
             pathType: Prefix
-            backend: 
-              service: 
-              name: my-Service
-              port: 
-                number: 80
-  
+            backend:
+              service:
+                name: my-service    
+                port:
+                  number: 80         
