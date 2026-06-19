@@ -7,3 +7,4 @@ FROM maven:3.9.16-eclipse-temurin-17-alpine AS runtime
 WORKDIR /app
 COPY --from=build /task/target/*.jar /app/
 EXPOSE 8080
+CMD ["java","-jar","*.jar"]
