@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: taskmanager-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: taskmanager
+
+  template:
+    metadata:
+      labels:
+        app: taskmanager
+
+    spec:
+      containers:
+      - name: taskmanager
+
+        image: 771358505960.dkr.ecr.ap-south-1.amazonaws.com/task-manager:latest
+
+        ports:
+        - containerPort: 8080
+
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql-service:3306/taskmanager_db?createDatabaseIfNotExist=true
+
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
