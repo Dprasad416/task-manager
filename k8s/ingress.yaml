@@ -4,9 +4,9 @@ metadata:
   name: task-manager-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    alb.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   rules:
     - host: task-manager.durgaprasad.shop   # replace with your domain
       http:
