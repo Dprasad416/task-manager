@@ -1,9 +1,33 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: taskmanager-config
-
+  name: task-manager-config
+  namespace: default
 data:
-  DB_HOST: mysql-service
-  DB_NAME: taskmanager_db
-  DB_PORT: "3306"
+  application.yml: |
+    spring:
+      application:
+        name: task-manager
+
+      datasource:
+        url: jdbc:mysql://mysql-service:3306/taskmanager_db?createDatabaseIfNotExist=true
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: false
+        properties:
+          hibernate:
+            format_sql: false
+            dialect: org.hibernate.dialect.MySQLDialect
+
+    server:
+      port: 8080
+
+    logging:
+      level:
+        root: WARN
+        com.taskmanager: INFO
