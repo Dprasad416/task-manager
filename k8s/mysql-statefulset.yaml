@@ -1,12 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
-
 metadata:
   name: mysql
 
 spec:
   serviceName: mysql-service
-
   replicas: 1
 
   selector:
@@ -42,11 +40,14 @@ spec:
 
   volumeClaimTemplates:
   - metadata:
-    name: mysql-storage
+      name: mysql-storage
+
     spec:
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteOnce
+
       storageClassName: gp2
+
       resources:
         requests:
           storage: 5Gi
